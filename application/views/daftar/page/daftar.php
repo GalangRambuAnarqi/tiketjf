@@ -6,7 +6,7 @@
   $captcha1->generatekode();
   include('./application/vendor/koneksi.php');
 
-  $id = 'VJF_01'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
+  $id = 'VJF_02'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
   $gaji = array(
         '3jt-5jt'=>"3 - 5 juta",
         '5jt-7jt'=>"5 - 7 juta",
