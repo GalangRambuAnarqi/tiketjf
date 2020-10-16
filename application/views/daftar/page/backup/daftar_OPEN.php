@@ -6,7 +6,7 @@
   $captcha1->generatekode();
   include('./application/vendor/koneksi.php');
 
-  $id = 'VJF_02'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
+  $id = 'VJF_01'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
   $gaji = array(
         '3jt-5jt'=>"3 - 5 juta",
         '5jt-7jt'=>"5 - 7 juta",
@@ -26,11 +26,10 @@
         <center><h2>Informasi </h2></center>
         <hr style="border-top: 1px dashed gray">
         <!-- <img src="<?php echo base_url() ?>assets/registrasi/img/iphone2.png" alt="guide"> -->
-      
-          <center><span>Pelaksanaan Jobfair Tanggal 12 - 22 Oktober 2020 (Diperpanjang)</span></center>
-         
+     
         <h2>Tata Cara Pendaftaran</h2>
           <!-- petunjuk -->
+       
         <div class="list-group vertical-steps">
           <div class="list-group-item completed"><span>Isi data diri Anda dengan lengkap pada form disamping, lalu klik "Daftar".</span></div>
           <!-- <div class="list-group-item completed"><span>Cek inbox/spam email anda untuk mendownload Tiket Jobfair UDINUS. Cetak tiket dalam ukuran A4 atau A5 & tunjukkan tiket pada saat masuk area Job Fair UDINUS.</span></div> -->
@@ -46,14 +45,13 @@
       <hr style="border-top: 1px dashed gray">
       <h2>Daftar Perusahaan</h2>
       <table id="dataTables" class="display">
-      <!-- <tr><td>Coming Soon !</td></tr> -->
       <thead>
         <tr>
             <th>No</th>
             <th>Nama Perusahaan</th>
         </tr>
       </thead>
-       <tbody>
+      <tbody>
         <?php
         $no=1;
          foreach($perusahaan as $data){
@@ -65,7 +63,7 @@
          <?php
          }
         ?>
-         </tbody> 
+         </tbody>
         </table>
               <!-- Daftar lowongan perusahaan jobfair diumumkan pada tanggal 1 Juni 2020 (H-1 Job Fair) dimulai. -->
               <br>
@@ -75,15 +73,14 @@
            <li>Twitter : <a href="https://twitter.com/dinus_career">@dinus_career (Klik)</a></li>
            <li>Facebook : <a href="https://www.facebook.com/udinuscc">Udinus Career Center (Klik)</a></li>
              </ul>
-             <!-- <hr style="border-top: 1px dashed gray">
-            *Bagi peserta virtual jobfair batch lalu, dimohon mendaftar kembali  -->
+
       </div>
    
 
 
         <div class="register span7">
         <form name="form" method="post" action="<?php echo base_url('daftar/submit'); ?>" onSubmit="return validasi(this)" role="form" enctype="multipart/form-data">
-            <h2>Formulir <span class="red"><strong>Virtual Job Fair 2 UDINUS</strong></span></h2>
+            <h2>Formulir <span class="red"><strong>Virtual Job Fair UDINUS</strong></span></h2>
              <!--<label for="id">Nomor Tiket</label> 
              <input type="text" id="id" name="id" value="<?php echo $id; ?>" disabled> -->
             <h3>No Tiket: <strong name="id"><?php echo $id; ?></strong></h3>
@@ -118,7 +115,7 @@
               <div class="form-group">
                 <input type="password" id="pass" name="pass" placeholder="Masukkan password yang mudah diingat">
               </div>
-              <input type="checkbox" onclick="showPass()" id="eye"> Lihat Password
+              <input type="checkbox" onclick="showPass()" id="eye"> Cek Password
             </div>
 
             <span class="red"><h3>DATA PRIBADI</h3></span>   

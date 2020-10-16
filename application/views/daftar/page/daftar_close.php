@@ -4,7 +4,7 @@
     
         <div class="register span12">
         <form name="form" method="post" action="<?php echo base_url('daftar/submit'); ?>" onSubmit="return validasi(this)" role="form" enctype="multipart/form-data">
-            <h2><strong>Maaf, Virtual Job Fair Sudah Selesai</strong></h2>
+            <h2><strong>Segera, Oktober / November 2020</strong></h2>
              <label for="id"><center>
             Dapatkan informasi loker/magang/event terbaru kami dengan cara : Follow Akun Instagram kami di <a href="https://www.instagram.com/udinuscareercenter/">@udinuscareercenter</a> atau di Kunjungi website kami di <a href="http://cc.dinus.ac.id">http://cc.dinus.ac.id</a>
              </center></label> 

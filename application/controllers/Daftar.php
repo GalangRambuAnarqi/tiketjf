@@ -35,13 +35,14 @@ class Daftar extends CI_Controller {
 		$this->form_validation->set_rules('gaji','gaji','required');
 		$this->form_validation->set_rules('frekuensi','frekuensi','required');
 
+		$regid='VJF_02'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
 		if($this->form_validation->run() !=false){
 			$captcha1 	= new mathcaptcha();
 			$spesialis = $this->input->post('sp');
 			foreach ($spesialis as $value) {
 				$data = array(
 					'spesialis_id' => (implode(',',(array)$value)),
-					'registrasi_id' => 'VJF_01'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT)
+					'registrasi_id' => $regid
 				);
 				$this->DATA->insertspe('detail_spesialisasiJF',$data);
 			}
@@ -75,7 +76,7 @@ class Daftar extends CI_Controller {
 				// 	$config['max_size']     	= 1024000;
 				// 	$config['overwrite']			= true;
 				// 	$this->upload->initialize($config); 
-				$create['id'] = 'VJF_01'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
+				$create['id'] = $regid;
 
 				$this->DATA->create('registrasiJF',$create);
 				$data_session = array(
@@ -137,9 +138,9 @@ class Daftar extends CI_Controller {
 		$semi_rand = md5(time());
 		$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
 
-		$headers = "MIME-Version: 1.0\n" .
-				   "Content-Type: multipart/mixed;\n" .
-				   " boundary=\"{$mime_boundary}\"";
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		$headers .= 'From: JOBFAIR UDINUS <career@cc.dinus.ac.id>'. "\r\n";
 
 		$pesan = "Terimakasih Sdr.{$NAMA} telah berhasil mendaftar di Virtual Job Fair UDINUS. Untuk mengikuti jobfair silahkan login menggukanan email ({$EMAIL}) dan password ({$PASS}) di alamat cc.dinus.ac.id/peserta_JF. Semoga sukses";
 

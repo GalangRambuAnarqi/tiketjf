@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Pendaftaran Job Fair Udinus 26</title>
+<title>Pendaftaran Virtual Jobfair 2 Udinus (12-22 Oktober 2020)</title>
     <meta name="description" content="JOBFAIR 2020">
     <meta name="keywords" content="Registrasi Online JOBFAIR UDINUS">
     <meta name="author" content="UDINUS CAREER CENTER">
