@@ -88,7 +88,7 @@
 
         <div class="register span7">
         <form name="form" method="post" action="<?php echo base_url('daftar/submit'); ?>" onSubmit="return validasi(this)" role="form" enctype="multipart/form-data">
-        <input type="hidden" value="<?=$id?>" name="idjf">
+        <!-- <input type="hidden" value="<?=$id?>" name="idjf"> -->
         <input type="hidden" value="<?=$jfke->id?>" name="jf_id">
             <h2>Formulir <span class="red">
             <strong>
@@ -99,7 +99,7 @@
             </strong></span></h2>
              <!--<label for="id">Nomor Tiket</label> 
              <input type="text" id="id" name="id" value="<?php echo $id; ?>" disabled> -->
-            <h3>No Tiket: <strong name="id"><?php echo $id; ?></strong></h3>
+            <!-- <h3>No Tiket: <strong name="id"><?php echo $id; ?></strong></h3> -->
             <span class="red"><h3>GOLONGAN TIKET</h3></span>
             <div class="form-group">
             <label>Golongan</label></dt>

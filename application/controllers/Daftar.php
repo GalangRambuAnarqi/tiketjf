@@ -41,7 +41,7 @@ class Daftar extends CI_Controller {
 		$this->form_validation->set_rules('gaji','gaji','required');
 		$this->form_validation->set_rules('frekuensi','frekuensi','required');
 
-		$regid=$this->input->post('idjf');
+		// $regid=$this->input->post('idjf');
 		if($this->form_validation->run() !=false){
 			$captcha1 	= new mathcaptcha();
 			$spesialis = $this->input->post('sp');
@@ -82,15 +82,16 @@ class Daftar extends CI_Controller {
 				// 	$config['max_size']     	= 1024000;
 				// 	$config['overwrite']			= true;
 				// 	$this->upload->initialize($config); 
-				$create['id'] = $regid;
+				// $create['id'] = $regid;
 				$create['jf_id'] = $this->input->post('jf_id');
 
 				$this->DATA->create('registrasiJF',$create);
 				$data_session = array(
-					'id' 		=> $create['id'],
+					// 'id' 		=> $create['id'],
 					'nama' 		=> $create['nama'],
 					'jurusan' 	=> $create['jurusan'],
 					'lulusan'  	=> $create['lulusan'],
+					'jf_id' 		=> $create['jf_id']
 					// 'qr'		=> $create['qr_code']
 				);
 				if ($create['id']) {
