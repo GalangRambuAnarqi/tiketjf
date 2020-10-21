@@ -110,6 +110,26 @@
           return (false);
       }
 
+      // if (form.sp.value == ""){
+      //     alert('Maaf, spesialisasi. harap diisi');
+      //     return false;
+      // }
+      // $cbx_group = $("input:checkbox[name='sp[]']");
+      // $cbx_group = $("input:checkbox[id^='option-']"); // name is not always helpful ;)
+
+      // if($cbx_group.is(":checked")){
+      //   $cbx_group.prop('required', false);
+      //   return (true);
+      // }else{
+      //   $cbx_group.prop('required', true);
+      //   return (false);
+      // }
+
+      if (!$('.spek').is(':checked')) {
+             alert('Maaf, Anda Belum Memilih Spek.');
+          return (false);
+        }
+
       if (form.jurusan.value == ""){
           alert('Maaf, Anda Belum Mengisi jurusan.');
           form.jurusan.focus();
@@ -183,6 +203,19 @@
         }
       });
     });
+
+  //   $(document).ready(function () {
+  //   $('#btndaftar').click(function() {
+  //     checked = $("input[type=checkbox]:checked").length;
+
+  //     if(!checked) {
+  //       alert("You must check at least one checkbox.");
+  //       return false;
+  //     }
+
+  //   });
+  // });
+
   </script>
 
 

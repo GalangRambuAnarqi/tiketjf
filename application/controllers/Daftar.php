@@ -8,15 +8,21 @@ include './application/vendor/PDF.php';
   $captcha1->generatekode();
 
 class Daftar extends CI_Controller {
-
+	function __construct(){
+        parent::__construct();
+		$this->load->helper('tgl_indo');
+		error_reporting(0);
+	}
+	
 	public function index()
 	{
+		$data['jfke']=$this->DATA->getjfke();
 		$data['content']['univ'] 	= $this->DATA->get_univ();
-		$where=array(
-			'status'=>'aktif'
-		);
-		$data['perusahaan'] = $this->DATA->GetWhere('perusahaan_JF',$where)->result_array();
+		$data['perusahaan'] = $this->DATA->getPerusahaan();
 		$data['page']       		= "daftar";
+		$data['daftar_univ']  		= $this->DATA->get_univ();
+		$data['jml_pelamar']		= $this->DATA->jumlahpendaftar($data['jfke']->id);
+		$data['spesialisasi']		= $this->DATA->getSpesialisasi();
 		$this->load->view('daftar/layout.php',$data);
 	}
 
@@ -35,7 +41,7 @@ class Daftar extends CI_Controller {
 		$this->form_validation->set_rules('gaji','gaji','required');
 		$this->form_validation->set_rules('frekuensi','frekuensi','required');
 
-		$regid='VJF_02'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
+		$regid=$this->input->post('idjf');
 		if($this->form_validation->run() !=false){
 			$captcha1 	= new mathcaptcha();
 			$spesialis = $this->input->post('sp');
@@ -50,7 +56,7 @@ class Daftar extends CI_Controller {
 				$create['golongan']			= $this->input->post('combo1');
 				$create['nama']				= $this->input->post('nama');
 				$create['email']			= $this->input->post('email');
-				$create['pass']			= md5($this->input->post('pass'));
+				$create['pass']				= md5($this->input->post('pass'));
 				$create['hp']				= $this->input->post('hp');
 				$create['alamat']			= $this->input->post('alamat');
 				$create['nim']				= strtoupper($this->input->post('nim'));
@@ -77,6 +83,7 @@ class Daftar extends CI_Controller {
 				// 	$config['overwrite']			= true;
 				// 	$this->upload->initialize($config); 
 				$create['id'] = $regid;
+				$create['jf_id'] = $this->input->post('jf_id');
 
 				$this->DATA->create('registrasiJF',$create);
 				$data_session = array(
@@ -92,7 +99,7 @@ class Daftar extends CI_Controller {
 				?>
 				<script>
 				window.alert('Registrasi sukses, silahkan login di https://cc.dinus.ac.id/peserta_JF untuk mengikuti jobfair');
-				window.location.href = 'https://cc.dinus.ac.id/peserta_JF';
+				window.location.href = 'http://localhost/peserta_JF';
 				</script>
 				<?php
 				$pwd=$this->input->post('pass');

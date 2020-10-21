@@ -2,7 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Pendaftaran Virtual Jobfair 2 Udinus (12-22 Oktober 2020)</title>
+<?php
+$cek=$this->DATA->getjfke();
+?>
+<title>Pendaftaran 
+<?=$cek->tipe=='online'? 'Virtual' : ''?> 
+Jobfair
+<?=$cek->ke?> 
+UDINUS 
+<?='('.mediumdate_indo($cek->tanggal_mulai).' - '.mediumdate_indo($cek->tanggal_selesai).')';?>
+</title>
     <meta name="description" content="JOBFAIR 2020">
     <meta name="keywords" content="Registrasi Online JOBFAIR UDINUS">
     <meta name="author" content="UDINUS CAREER CENTER">

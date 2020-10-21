@@ -6,7 +6,7 @@
   $captcha1->generatekode();
   include('./application/vendor/koneksi.php');
 
-  $id = 'VJF_02'. str_pad($this->DATA->jumlahpendaftar() + 1,5,"0",STR_PAD_LEFT);
+  $id = $jfke->kode. str_pad($jml_pelamar + 1,5,"0",STR_PAD_LEFT);
   $gaji = array(
         '3jt-5jt'=>"3 - 5 juta",
         '5jt-7jt'=>"5 - 7 juta",
@@ -19,6 +19,8 @@
     "2 Mingguan",
     "Bulanan",
   );
+
+  
  ?>
 <div class="register-container container">
       <div class="row">
@@ -26,8 +28,11 @@
         <center><h2>Informasi </h2></center>
         <hr style="border-top: 1px dashed gray">
         <!-- <img src="<?php echo base_url() ?>assets/registrasi/img/iphone2.png" alt="guide"> -->
-      
-          <center><span>Pelaksanaan Jobfair Tanggal 12 - 22 Oktober 2020 (Diperpanjang)</span></center>
+   
+        <center><span>Pelaksanaan tanggal : 
+<?=mediumdate_indo($jfke->tanggal_mulai).' - '.mediumdate_indo($jfke->tanggal_selesai);?>
+
+</span></center>
          
         <h2>Tata Cara Pendaftaran</h2>
           <!-- petunjuk -->
@@ -83,7 +88,15 @@
 
         <div class="register span7">
         <form name="form" method="post" action="<?php echo base_url('daftar/submit'); ?>" onSubmit="return validasi(this)" role="form" enctype="multipart/form-data">
-            <h2>Formulir <span class="red"><strong>Virtual Job Fair 2 UDINUS</strong></span></h2>
+        <input type="hidden" value="<?=$id?>" name="idjf">
+        <input type="hidden" value="<?=$jfke->id?>" name="jf_id">
+            <h2>Formulir <span class="red">
+            <strong>
+            <?=$jfke->tipe=='online'? 'Virtual' : ''?> 
+            Jobfair
+            <?=$jfke->ke?> 
+            UDINUS 
+            </strong></span></h2>
              <!--<label for="id">Nomor Tiket</label> 
              <input type="text" id="id" name="id" value="<?php echo $id; ?>" disabled> -->
             <h3>No Tiket: <strong name="id"><?php echo $id; ?></strong></h3>
@@ -156,7 +169,7 @@
                   <select class="form-control select2" name="lulusan" id="lulusan" required>
                     <option value="0">- Pilih Salah Satu Universitas / SMU -</option>
                     <?php 
-                      foreach ($this->DATA->get_univ() as $univ) {?>
+                      foreach ($daftar_univ as $univ) {?>
                         <option value="<?=$univ['id'];?>"><?=$univ['nama_univ'];?></option>
                       <?php } ?>
                   </select>
@@ -198,11 +211,11 @@
             <div class="row">
               <div class="pricing-levels-3">
                 <?php
-                  $query2    = mysqli_query($conn,"select * from spesialisJF17 order by id");
-                  while($row = mysqli_fetch_object($query2)){
+
+                  foreach($spesialisasi as $row){
                 ?>
-                  <input class="single-checkbox" type="checkbox" name="sp[]" value="<?= $row->id; ?>"> 
-                  &nbsp;&nbsp;<?= $row->nama; ?><br />
+                  <input class="single-checkbox spek" type="checkbox" id="sp" name="sp[]" value="<?= $row['id']; ?>"> 
+                  &nbsp;&nbsp;<?= $row['nama']; ?><br />
                 <?php
                   }
                 ?>
@@ -211,8 +224,8 @@
             <div class="form-group">            
             <label for="spesialisasi"> Pilih range gaji yang diinginkan</label>
               <div class="form-group">
-                <select name="gaji">
-                <option value="0">Pilih</option>
+                <select name="gaji" required>
+                <option value="">Pilih</option>
                 <?php
                   foreach($gaji as $key=>$value){
                     echo "<option value='". $key . "'>" . $value . "</option>";
@@ -224,8 +237,8 @@
             <div class="form-group">
             <label for="spesialisasi"> Frekuensi Menerima Informasi Lowongan</label>
               <div class="form-group">
-                <select name="frekuensi">
-                <option value="0">Pilih</option>
+                <select name="frekuensi" required>
+                <option value="">Pilih</option>
                 <?php
                   foreach($frekuensi_lowongan as $key=>$value){
                     echo "<option value='". $key . "'>" . $value . "</option>";
@@ -248,7 +261,7 @@
               <input type="text" name="kode" id="kode" name="kode"required="">
             </div>
             </p>
-            <button class="btn btn-large btn-danger" type="submit">Daftar</button>
+            <button class="btn btn-large btn-danger" id="btndaftar" type="submit">Daftar</button>
                   <div class="form-group">
               <!-- <font size="2" color="red" width="10"> *Bila tiket tidak masuk inbox/spam pada email anda silahkan login dan unduh tiket anda di <a href="https://cc.dinus.ac.id/peserta_JF/">Website Peserta Job Fair</a></font>     -->
             </div>

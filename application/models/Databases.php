@@ -12,7 +12,10 @@
         }
 
         public function cek_email($email){
+            $jfke=$this->getjfke();
+            $idjf=$jfke->id;
             $this->db->where('email', $email);  
+            $this->db->where('jf_id', $idjf);  
             $query = $this->db->get("registrasiJF")->num_rows();
             return $query;
         }
@@ -24,9 +27,10 @@
         }
 
 
-        function jumlahpendaftar(){
+        function jumlahpendaftar($jfid){
             $this->db->select("id");
             $this->db->from("registrasiJF");
+            $this->db->where("jf_id",$jfid);
             $read =  $this->db->get()->result_array();
             return count($read);
         }
@@ -34,6 +38,10 @@
         function create($tabel,$create){
             $this->db->insert($tabel, $create);
             return $this->db->insert_id();
+        }
+        
+        function getSpesialisasi(){
+            return $this->db->get('spesialisJF17')->result_array();
         }
 
         public function newID(){
@@ -75,10 +83,24 @@
             return $this->db->get()->result_array();
         }
 
+        public function getjfke(){
+            return $this->db->select("*")
+                     ->from("jf_ke")
+                     ->order_by('id','DESC')
+                     ->get()->row();
+        }
+
         //PESERTA
 
         public function GetWhere($table,$where){
             return $this->db->get_where($table,$where);
+        }
+
+        public function getPerusahaan(){
+            $where=array(
+                'status'=>'aktif'
+            );
+            return $this->db->get_where('perusahaan_JF',$where)->result_array();
         }
 
         public function update_data($table,$set,$where){
