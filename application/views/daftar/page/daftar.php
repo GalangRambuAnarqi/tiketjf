@@ -6,7 +6,7 @@
   $captcha1->generatekode();
   include('./application/vendor/koneksi.php');
 
-  $id = $jfke->kode. str_pad($jml_pelamar + 1,5,"0",STR_PAD_LEFT);
+  // $id = $jfke->kode. str_pad($jml_pelamar + 1,5,"0",STR_PAD_LEFT);
   $gaji = array(
         '3jt-5jt'=>"3 - 5 juta",
         '5jt-7jt'=>"5 - 7 juta",
@@ -90,6 +90,7 @@
         <form name="form" method="post" action="<?php echo base_url('daftar/submit'); ?>" onSubmit="return validasi(this)" role="form" enctype="multipart/form-data">
         <!-- <input type="hidden" value="<?=$id?>" name="idjf"> -->
         <input type="hidden" value="<?=$jfke->id?>" name="jf_id">
+        <input type="hidden" value="<?=$jfke->kode?>" name="kodejf">
             <h2>Formulir <span class="red">
             <strong>
             <?=$jfke->tipe=='online'? 'Virtual' : ''?> 

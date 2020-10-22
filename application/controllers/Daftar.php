@@ -21,7 +21,7 @@ class Daftar extends CI_Controller {
 		$data['perusahaan'] = $this->DATA->getPerusahaan();
 		$data['page']       		= "daftar";
 		$data['daftar_univ']  		= $this->DATA->get_univ();
-		$data['jml_pelamar']		= $this->DATA->jumlahpendaftar($data['jfke']->id);
+		// $data['jml_pelamar']		= $this->DATA->jumlahpendaftar($data['jfke']->id);
 		$data['spesialisasi']		= $this->DATA->getSpesialisasi();
 		$this->load->view('daftar/layout.php',$data);
 	}
@@ -52,6 +52,7 @@ class Daftar extends CI_Controller {
 				);
 				$this->DATA->insertspe('detail_spesialisasiJF',$data);
 			}
+			
 			if($captcha1->resultcaptcha() == $_POST['kode']){
 				$create['golongan']			= $this->input->post('combo1');
 				$create['nama']				= $this->input->post('nama');
@@ -83,15 +84,23 @@ class Daftar extends CI_Controller {
 				// 	$config['overwrite']			= true;
 				// 	$this->upload->initialize($config); 
 				// $create['id'] = $regid;
-				$create['jf_id'] = $this->input->post('jf_id');
+				// $create['jf_id'] = $this->input->post('jf_id');
 
 				$this->DATA->create('registrasiJF',$create);
+
+				// $id = $jfke->kode. str_pad($jml_pelamar + 1,5,"0",STR_PAD_LEFT);
+				$iduser=$this->DATA->getLastId();
+				$idjf=$this->input->post('jf_id');
+				$kodejf=$this->input->post('kodejf'). str_pad($iduser,5,"0",STR_PAD_LEFT);
+				
+				$this->DATA->insertspe('partisipasi_JF',array('id_registrasi'=>$iduser,'id_jf'=>$idjf,'kode_registrasi'=>$kodejf));
+
 				$data_session = array(
 					// 'id' 		=> $create['id'],
 					'nama' 		=> $create['nama'],
 					'jurusan' 	=> $create['jurusan'],
 					'lulusan'  	=> $create['lulusan'],
-					'jf_id' 		=> $create['jf_id']
+					// 'jf_id' 		=> $create['jf_id']
 					// 'qr'		=> $create['qr_code']
 				);
 				if ($create['id']) {

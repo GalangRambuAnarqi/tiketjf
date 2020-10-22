@@ -231,12 +231,12 @@ function closeForm() {
 
 
 <script>
-$(document).ready(function()
-{ 
-       $(document).bind("contextmenu",function(e){
-              return false;
-       }); 
-})
+// $(document).ready(function()
+// { 
+//        $(document).bind("contextmenu",function(e){
+//               return false;
+//        }); 
+// })
 </script>
 
 <script>

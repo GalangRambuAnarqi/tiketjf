@@ -14,10 +14,35 @@
         public function cek_email($email){
             $jfke=$this->getjfke();
             $idjf=$jfke->id;
-            $this->db->where('email', $email);  
-            $this->db->where('jf_id', $idjf);  
-            $query = $this->db->get("registrasiJF")->num_rows();
-            return $query;
+
+            // $regid=$this->getRowBy('registrasiJF',array('email'=>$email))->iduser;
+       
+            // $this->db->where('email', $email);  
+            // $this->db->where('jf_id', $idjf);  
+            // $query = $this->db->get("registrasiJF")->num_rows();
+            // return $query;
+
+            $this->db->select('a.*');
+            $this->db->from('registrasiJF a');
+            $this->db->join('partisipasi_JF b', 'b.id_registrasi = a.iduser', 'left'); 
+            $this->db->where('a.email', $email);  
+            $this->db->where('b.id_jf', $idjf);  
+            $query = $this->db->get();
+            return $query->num_rows();
+        }
+
+        function getRowBy($tb,$where){
+            return $this->db->select('*')
+            ->from($tb)
+            ->where($where)
+            ->get()->row();
+        }
+
+        function getLastId(){
+            return $this->db->select('iduser')
+                    ->from('registrasiJF')
+                    ->order_by('iduser','DESC')
+                    ->get()->row()->iduser;
         }
 
         public function cek_nim($nim){
